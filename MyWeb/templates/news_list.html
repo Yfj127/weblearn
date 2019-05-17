@@ -1,0 +1,24 @@
+{% extends 'base.html '%}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ new_type }}新闻{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+{{ new_type }}新闻列表：
+<ul>
+    {% for data,title in new_titles %}
+        {% if forloop.first %}
+        <li><font color="red">{{ title}}</font>{{ data }}</li>
+        {% else %}
+            <li>{{ title}} {{ data }}</li>
+        {% endif %}
+    {% empty %}
+        <font color="green">抱歉：暂时没有新闻</font>
+    {% endfor %}
+</ul>
+{% endblock %}
+</body>
+</html>
