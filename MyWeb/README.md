@@ -68,3 +68,5 @@ python manage.py shell
 
 ------导入数据  data.txt  and data_con.py  但是这里导入文件时出错，最后在 shell环境下完成导入（没有解决）
 配置相关文件 编写index.html  通过提交的地址找到url 对应的函数，按要求取数据
+
+了解js json 进行数据库存取操作

@@ -8,3 +8,9 @@ class Goods(models.Model):
 	goods_price = models.FloatField()
 
 
+class User(models.Model):
+	user_name = models.CharField(max_length=32, primary_key=True)
+	password = models.CharField(max_length=16)
+
+
+

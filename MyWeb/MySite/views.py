@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .trans import trans
-from .models import Goods
+from .models import Goods, User
+import json
 
 # Create your views here.
 
@@ -52,5 +53,43 @@ def searchsort(request):
             }
     return render(request, 'search_result.html', {'goods_list': sort[request.GET.get('sort')]})
 
+def reg(request):
+	return render(request, 'register.html')
 
+def check(request):
+	user_name = request.GET.get('user_name')
+	user = User.objects.filter(user_name=user_name)
+	if user:
+		status = 100
+	else:
+		status = 200
+	return HttpResponse(status)
+
+def register(request):
+	user_name = request.GET.get('user_name')
+	password = request.GET.get('password')
+	try:
+		user = User(user_name=user_name, password=password)
+		user.save()
+		status = 200
+	except:
+		status = 100
+	return HttpResponse(json.dumps({'status':status}))
+
+def change(request):
+	return render(request, 'change.html')
+
+def changepass(request):
+	user_name = request.GET.get('user_name')
+	pass_word = request.GET.get('password')
+	user = User.objects.get(user_name=user_name)
+	try:
+		user.password = pass_word
+		print(user.password, user.user_name)
+		user.save()
+		status = 200
+	except:
+		status = 100
+
+	return HttpResponse(json.dumps({'status': status}))
 
